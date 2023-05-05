@@ -1,0 +1,62 @@
+To install Jenkins on a Red Hat machine, you can follow these steps:
+
+1. Update the system:
+	sudo yum update
+
+2.Install Java Development Kit (JDK):
+
+	Jenkins requires Java to be installed. Install the OpenJDK package using the package manager:
+
+	sudo yum install fontconfig java-11-openjdk
+
+3. Add the Jenkins repository:
+
+	Import the Jenkins repository key:
+
+	sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat/jenkins.repo
+	sudo rpm --import https://pkg.jenkins.io/redhat/jenkins.io-2023.key
+
+4.Install Jenkins:
+
+	Run the following command to install Jenkins and its dependencies:
+
+	sudo yum install jenkins
+
+5. Start the Jenkins service:
+
+	Start the Jenkins service using the following command:
+	
+    sudo systemctl start jenkins
+
+6.Enable Jenkins to start on boot:
+
+	Enable Jenkins to start automatically on system boot:
+
+	sudo systemctl enable jenkins
+
+7. Adjust firewall rules:
+
+   If you have a firewall enabled, you need to allow incoming connections on port 8080 (default Jenkins port):
+
+	sudo firewall-cmd --zone=public --add-port=8080/tcp --permanent
+	sudo firewall-cmd --reload
+
+8. Access Jenkins:
+
+	Open a web browser and enter http://<your-server-ip>:8080. You should see the Jenkins web interface.
+	Retrieve the initial administrator password by running the following command:
+
+	sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+
+7. Copy the password and paste it into the Jenkins web interface to unlock and configure Jenkins.
+
+	Install recommended plugins:
+
+	During the initial setup, Jenkins will prompt you to install recommended plugins. Choose the option to install them, as these plugins provide essential functionality.
+	Set up the admin user:
+
+	Create an admin user account by providing the necessary details, such as username, password, and email address.
+	Start using Jenkins:
+
+	After completing the setup, Jenkins is ready for use. You can create jobs, configure pipelines, and automate your software development workflows using the Jenkins web interface.
+	Please note that these steps provide a general guideline. Depending on your specific Red Hat system configuration, there might be slight variations. It's always recommended to refer to the official Jenkins documentation for the latest instructions and information on installing Jenkins on Red Hat-based systems.
